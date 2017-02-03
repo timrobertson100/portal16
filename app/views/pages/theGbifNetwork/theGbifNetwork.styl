@@ -69,6 +69,7 @@
         .count-number {
             font-size 2em
             font-weight lighter
+            outline none
         }
         .count-label {
             font-size 1.1em
@@ -179,6 +180,12 @@
 }
 .count-literature {
     color $orange3
+    > a {
+        color $orange3
+        &:hover {
+            text-decoration none
+        }
+    }
 }
 
 .chart-literature {

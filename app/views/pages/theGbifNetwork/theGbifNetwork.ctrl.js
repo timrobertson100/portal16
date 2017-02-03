@@ -19,6 +19,11 @@ function theGbifNetworkCtrl(DirectoryParticipants, DirectoryParticipantsCount, P
     else {
         vm.currentRegion = 'GLOBAL';
     }
+    vm.litSearchUrl = '/cms/search?type=literature';
+    if (vm.currentRegion !== 'GLOBAL') {
+        vm.litSearchUrl += '&category_gbif_region=' + vm.currentRegion;
+    }
+    vm.litSearchUrl += '&category_gbif_literature_annotation=1341'; // tid of GBIF_used
 
     vm.membershipType = 'active';
     vm.showChart = false;
@@ -90,6 +95,11 @@ function theGbifNetworkCtrl(DirectoryParticipants, DirectoryParticipantsCount, P
             });
         loadParticipantsDigest(vm.currentRegion);
         loadRegionalReps(vm.currentRegion);
+        vm.litSearchUrl = '/cms/search?type=literature';
+        if (vm.currentRegion !== 'GLOBAL') {
+            vm.litSearchUrl += '&category_gbif_region=' + vm.currentRegion;
+        }
+        vm.litSearchUrl += '&category_gbif_literature_annotation=1341'; // tid of GBIF_used
 
         var regionLower = region.toLowerCase().replace('_', '-');
         $location.path('/the-gbif-network/' + regionLower);

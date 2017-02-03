@@ -76,9 +76,10 @@
                                 </div>
                                 <div class="entity-counts">
                                     <div class="entity-count">
-                                        <div class="count-number count-literature"
-                                             ng-bind="vm.count.literature ? vm.count.literature : '{$ data.count.literature | localizeInteger(gb.locales.current) $}'">
-                                            {$ data.count.literature | localizeInteger(gb.locales.current) $}
+                                        <div class="count-number count-literature">
+                                             <a href="{{ vm.litSearchUrl }}" ng-bind="vm.count.literature ? vm.count.literature : '{$ data.count.literature | localizeInteger(gb.locales.current) $}'">
+                                                 {$ data.count.literature | localizeInteger(gb.locales.current) $}
+                                             </a>
                                         </div>
                                         <div class="count-label medium-long-label">{$ __('theGbifNetwork.peerReviewedPublicationBy') $}</div>
                                     </div>
