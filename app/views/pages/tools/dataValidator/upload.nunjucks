@@ -1,20 +1,16 @@
-<!-- Select file -->
-<div>
-    <div class="text-center">
-        <div class="dataValidator__input-file">
-            <input type="file" name="myfile" file-upload on-file-change="dataValidator.handleUploadFile">
-            <a href="">Select file</a>
+<div class="horizontal-stripe--paddingless article-header white-background">
+    <div class="container--narrow">
+        <div class="row">
+            <div class="col-xs-12 data-validator__user-section text-center">
+                <div class="data-validator__user-block data-validator__input-file">
+                    <input type="file" file-upload on-file-change="dataValidator.handleUploadFile"/>
+                    <a href="">{$ __('dataValidator.selectFile') $}</a>
+                </div>
+                <div class="data-validator__user-block data-validator__drop-area ng-cloak" droppable drop="dataValidator.handleDrop">{$ __('dataValidator.dropHere') $}</div>
+                <div class="data-validator__user-block data-validator__input-url">
+                    <input type="text" ng-model="resourceToValidate.fileUrl" placeholder="{$ __('dataValidator.provideUrl') $}" ng-change="dataValidator.handleFileUrl(resourceToValidate)"/>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="text-center">
-        <form name="fileUrlForm" novalidate>
-            <label for="fileurl">URL:</label>
-            <input type="text" name="fileurl" ng-model="resourceToValidate.fileUrl"/><br/>
-            <br/>
-            <button type="submit"
-                    ng-click="dataValidator.handleFileUrl(resourceToValidate)">Submit
-            </button>
-        </form>
     </div>
 </div>

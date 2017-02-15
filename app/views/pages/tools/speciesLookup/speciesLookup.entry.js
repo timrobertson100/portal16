@@ -1,9 +1,6 @@
 'use strict';
 
 var async = require('async');
-
-require('./droppable.directive');
-
 var Converter = require("csvtojson").Converter;
 
 angular

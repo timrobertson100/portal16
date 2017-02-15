@@ -2082,6 +2082,12 @@
     "bifaProgramme": "BIFA: Biodiversity Information Fund for Asia",
     "funders": "Funders"
   },
+  "dataValidator": {
+    "title": "Data Validator",
+    "selectFile": "Select a file",
+    "dropHere": "Drop a file",
+    "provideUrl": "Or use a file URL"
+  },
   "validation": {
     "category": {
       "RESOURCE_STRUCTURE": "Resource Structure",

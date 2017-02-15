@@ -1,8 +1,13 @@
 'use strict';
 var angular = require('angular');
 
-angular.module('portal').directive('droppable', function () {
+angular
+    .module('portal')
+    .directive('droppable', droppableDirective);
+
+function droppableDirective() {
     return {
+        restrict: 'A',
         scope: {
             drop: '&',
             bin: '='
@@ -61,4 +66,6 @@ angular.module('portal').directive('droppable', function () {
             );
         }
     }
-});
+}
+
+module.exports = droppableDirective;

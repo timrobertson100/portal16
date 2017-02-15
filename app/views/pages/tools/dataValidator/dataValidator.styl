@@ -1,16 +1,13 @@
-.dataValidator {
-    &__dropArea {
-        width 200px
-        height 200px
-        background #ddd
-        border-radius 50%
-        margin auto
-        line-height 200px
-        text-align center
-        color white
-        &.over {
-            background tomato
-        }
+.data-validator {
+    &__user-section {
+        vertical-align middle
+        height 100%
+    }
+    &__user-block {
+        display inline-block
+        vertical-align middle
+        text-transform uppercase
+        width 33%
     }
     &__input-file {
         position relative
@@ -18,13 +15,12 @@
         overflow hidden
         margin auto
         a {
-            // background $speciesLookupActiveColor
+        // background $speciesLookupActiveColor
             padding 5px 20px
-            // color #fff
+        // color #fff
             transition all .4s
             width 100%
             text-align center
-            text-transform uppercase
         }
         input {
             position absolute
@@ -37,6 +33,32 @@
             cursor pointer
             padding 5px 20px
             width 100%
+        }
+    }
+    &__drop-area {
+        width 200px
+        height 200px
+        background #ddd
+        border-radius 50%
+        margin auto
+        line-height 200px
+        text-align center
+        color white
+        &.over {
+            background tomato
+        }
+    }
+    &__input-url {
+        > input {
+            outline none
+            border-top none
+            border-left none
+            border-right none
+            border-bottom 1px dashed $gray20
+            text-transform uppercase
+            &:hover {
+                cursor pointer
+            }
         }
     }
 }

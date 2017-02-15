@@ -1,9 +1,8 @@
 'use strict';
-var _ = require('lodash');
-require('../../../components/fileUpload/fileUpload.directive');
 
-//only available on dev for now
-var devApiUrl = '//api.gbif-dev.org/v1/';
+var angular = require('angular'),
+    _ = require('lodash'),
+    devApiUrl = '//api.gbif-dev.org/v1/'; //only available on dev for now
 
 angular
     .module('portal')
@@ -22,6 +21,22 @@ function dataValidatorCtrl($http, $window) {
         var formData = new FormData();
         formData.append('file', params.files[0]);
 
+        $http({
+            url: devApiUrl + 'validator/jobserver/submit',
+            method: "POST",
+            data: formData,
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).success(function (data, status) {
+            handleValidationSubmitResponse(data, status);
+        }).error(function (data) {
+            handleWSError(data);
+        });
+    };
+
+    vm.handleDrop = function (e) {
+        var formData = new FormData();
+        formData.append('file', e.dataTransfer.files[0]);
         $http({
             url: devApiUrl + 'validator/jobserver/submit',
             method: "POST",
@@ -74,7 +89,7 @@ function dataValidatorCtrl($http, $window) {
 
     function handleValidationSubmitResponse(data) {
         //TODO validate that there is a jobId and if not display error message
-        $window.location.href = '/tools/data-validator-test/' + data.jobId;
+        $window.location.href = '/tools/data-validator/' + data.jobId;
     }
 
     function handleValidationResult(responseData) {

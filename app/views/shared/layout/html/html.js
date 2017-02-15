@@ -170,6 +170,7 @@ require('../../../components/filterLocation/bboxFilter/bboxFilter.directive');
 require('../../../components/filterInterval/filterInterval.directive');
 require('../../../components/filterFacet/filterFacet.directive');
 require('../../../components/count/count.directive');
+require('../../../components/droppable/droppable.directive');
 
 require('../../../components/filterEnum/filterEnum.directive');
 require('../../../components/filterTernary/filterTernary.directive');

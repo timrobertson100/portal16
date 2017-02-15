@@ -4,21 +4,29 @@
     <article class="wrapper-horizontal-stripes page--data"
              ng-controller="dataValidatorCtrl as dataValidator">
 
-        <div class="container-fluid white-background search-header">
-            <div class="row">
-                <div class="col-xs-12">
-                    <nav class="article-header__category article-header__category--deep">
-                        <span class="article-header__category__upper">Tools</span>
-                        <span class="article-header__category__lower">Data validator</span>
-                    </nav>
+        <div class="horizontal-stripe article-header white-background">
+            <div class="container--narrow">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <span>{$ __('cms.heading.primary.tools') $}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <header class="col-xs-12 article-header">
+                        <h1>{$ __('dataValidator.title') $}</h1>
+                        <div class="body-text--markdown">
+                            {# fulltext html already wrapped by <p> from Content API #}
+                            {$ intro | safe $}
+                        </div>
+                    </header>
                 </div>
             </div>
         </div>
 
         {% include "./upload.nunjucks" %}
     </article>
-{% endblock %}
 
+{% endblock %}
 
 {% block scripts %}
     <script src="/js/base/pages/dataValidator.js"></script>
