@@ -7,30 +7,23 @@ module.exports = function (app) {
     app.use('/', router);
 };
 
-router.get('/tools/data-validator', (req, res, next) => {
+router.get('/tools/data-validator/:jobId?', (req, res, next) => {
 
     getIntro(res.locals.gb.locales.current)
         .then(text => {
+
+            let title = (typeof req.params.jobId !== 'undefined') ? res.__('dataValidator.resultTitle') : res.__('dataValidator.title');
+
             res.render('pages/tools/dataValidator/dataValidator', {
                 intro: text[0],
-                _meta: {
-                    title: 'Data validator'
-                }
+                title: title,
+                jobId: req.params.jobId
             });
         })
         .catch(e => {
             next(e);
         });
 
-});
-
-router.get('/tools/data-validator/:jobid',  (req, res) => {
-    res.render('pages/tools/dataValidator/dataValidatorResults', {
-        _meta: {
-            title: 'Data validator'
-        },
-        jobId: req.params.jobid
-    });
 });
 
 function getIntro(language) {

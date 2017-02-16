@@ -2084,6 +2084,7 @@
   },
   "dataValidator": {
     "title": "Data Validator",
+    "resultTitle": "Data Validator: Result",
     "selectFile": "Select a file",
     "dropHere": "Drop a file",
     "provideUrl": "Or use a file URL"

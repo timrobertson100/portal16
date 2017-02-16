@@ -5,7 +5,7 @@
 require('../../../components/droppable/droppable.directive');
 
 var _ = require('lodash'),
-    devApiUrl = '//api.gbif-dev.org/v1/'; //only available on dev for now
+    devApiUrl = '//localhost:8080'; // //api.gbif-dev.org/v1/validator/
 
 angular
     .module('portal')
@@ -25,7 +25,7 @@ function dataValidatorCtrl($http, $window) {
         formData.append('file', params.files[0]);
 
         $http({
-            url: devApiUrl + 'validator/jobserver/submit',
+            url: devApiUrl + '/jobserver/submit',
             method: "POST",
             data: formData,
             transformRequest: angular.identity,
@@ -41,7 +41,7 @@ function dataValidatorCtrl($http, $window) {
         var formData = new FormData();
         formData.append('file', e.dataTransfer.files[0]);
         $http({
-            url: devApiUrl + 'validator/jobserver/submit',
+            url: devApiUrl + '/jobserver/submit',
             method: "POST",
             data: formData,
             transformRequest: angular.identity,
@@ -57,7 +57,7 @@ function dataValidatorCtrl($http, $window) {
         var postParams = {params: {}};
         _.merge(postParams.params, params);
 
-        var url = devApiUrl + 'validator/jobserver/submiturl';
+        var url = devApiUrl + '/jobserver/submiturl';
         $http.post(url, null, postParams)
             .success(function (data, status) {
                 handleValidationSubmitResponse(data, status);
@@ -67,12 +67,12 @@ function dataValidatorCtrl($http, $window) {
             });
     };
 
-    vm.getValidationResults = function(jobid) {
+    vm.getValidationResults = function(jobId) {
 
         loadEvaluationCategory();
 
         $http({
-            url: devApiUrl + 'validator/jobserver/status/' + jobid
+            url: devApiUrl + '/jobserver/status/' + jobId
         }).success(function (data) {
             handleValidationResult(data);
         }).error(function () { //data, status, headers, config
@@ -82,7 +82,7 @@ function dataValidatorCtrl($http, $window) {
 
     function loadEvaluationCategory() {
         $http({
-            url: devApiUrl + 'validator/enumeration/simple/EvaluationCategory'
+            url: devApiUrl + '/enumeration/simple/EvaluationCategory'
         }).success(function (data) {
             vm.evaluationCategory = data;
         }).error(function () { //data, status, headers, config

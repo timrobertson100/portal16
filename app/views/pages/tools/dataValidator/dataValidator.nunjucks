@@ -2,7 +2,7 @@
 
 {% block page %}
     <article class="wrapper-horizontal-stripes page--data"
-             ng-controller="dataValidatorCtrl as dataValidator">
+             ng-controller="dataValidatorCtrl as vm">
 
         <div class="horizontal-stripe article-header white-background">
             <div class="container--narrow">
@@ -13,19 +13,27 @@
                 </div>
                 <div class="row">
                     <header class="col-xs-12 article-header">
-                        <h1>{$ __('dataValidator.title') $}</h1>
-                        <div class="body-text--markdown">
-                            {# fulltext html already wrapped by <p> from Content API #}
-                            {$ intro | safe $}
-                        </div>
+                        <h1>{$ title $}</h1>
+                        {% if jobId | isNotEmpty %}
+                            <div ng-init="vm.jobId = '{$ jobId $}'">
+                                {{ vm.jobId }} - {{ vm.jobStatus }}
+                            </div>
+                        {% else %}
+                            <div class="body-text--markdown">
+                                {# fulltext html already wrapped by <p> from Content API #}
+                                {$ intro | safe $}
+                            </div>
+                        {% endif %}
                     </header>
                 </div>
             </div>
         </div>
-
-        {% include "./upload.nunjucks" %}
+        {% if jobId | isNotEmpty %}
+            {% include "./validationResults.nunjucks" %}
+        {% else %}
+            {% include "./upload.nunjucks" %}
+        {% endif %}
     </article>
-
 {% endblock %}
 
 {% block scripts %}

@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-xs-12 data-validator__user-section text-center">
                 <div class="data-validator__user-block data-validator__input-file">
-                    <input type="file" file-upload on-file-change="dataValidator.handleUploadFile"/>
+                    <input type="file" file-upload on-file-change="vm.handleUploadFile"/>
                     <a href="">{$ __('dataValidator.selectFile') $}</a>
                 </div>
-                <div class="data-validator__user-block data-validator__drop-area ng-cloak" droppable drop="dataValidator.handleDrop">{$ __('dataValidator.dropHere') $}</div>
+                <div class="data-validator__user-block data-validator__drop-area ng-cloak" droppable drop="vm.handleDrop">{$ __('dataValidator.dropHere') $}</div>
                 <div class="data-validator__user-block data-validator__input-url">
-                    <input type="text" ng-model="resourceToValidate.fileUrl" placeholder="{$ __('dataValidator.provideUrl') $}" ng-change="dataValidator.handleFileUrl(resourceToValidate)"/>
+                    <input type="text" ng-model="vm.resourceToValidate.fileUrl" placeholder="{$ __('dataValidator.provideUrl') $}" ng-change="vm.handleFileUrl(vm.resourceToValidate)"/>
                 </div>
             </div>
         </div>
