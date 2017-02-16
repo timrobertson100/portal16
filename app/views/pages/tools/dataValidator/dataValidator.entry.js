@@ -1,7 +1,10 @@
 'use strict';
 
-var angular = require('angular'),
-    _ = require('lodash'),
+// Require the directive here as this has its own build task.
+// This also avoid the directive being built into the main javascript.
+require('../../../components/droppable/droppable.directive');
+
+var _ = require('lodash'),
     devApiUrl = '//api.gbif-dev.org/v1/'; //only available on dev for now
 
 angular

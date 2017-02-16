@@ -1,5 +1,7 @@
 'use strict';
 
+require('../../../components/droppable/droppable.directive');
+
 var async = require('async');
 var Converter = require("csvtojson").Converter;
 
