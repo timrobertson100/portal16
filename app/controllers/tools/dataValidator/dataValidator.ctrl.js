@@ -12,7 +12,7 @@ router.get('/tools/data-validator/:jobId?', (req, res, next) => {
     getIntro(res.locals.gb.locales.current)
         .then(text => {
 
-            let title = (typeof req.params.jobId !== 'undefined') ? res.__('dataValidator.resultTitle') : res.__('dataValidator.title');
+            let title = res.__('dataValidator.title');
 
             res.render('pages/tools/dataValidator/dataValidator', {
                 intro: text[0],

@@ -2087,7 +2087,8 @@
     "resultTitle": "Data Validator: Result",
     "selectFile": "Select a file",
     "dropHere": "Drop a file",
-    "provideUrl": "Or use a file URL"
+    "provideUrl": "Or use a file URL",
+    "inProgress": "Validation task (ID: {NUMBER, select, one{dataset} other{datasets}}"
   },
   "validation": {
     "category": {

@@ -16,7 +16,9 @@
                         <h1>{$ title $}</h1>
                         {% if jobId | isNotEmpty %}
                             <div ng-init="vm.jobId = '{$ jobId $}'">
-                                {{ vm.jobId }} - {{ vm.jobStatus }}
+                                <div ng-if="vm.jobStatus !== 'FINISHED'" class="data-validator__in-progress">
+                                    Validation task (ID: {{ vm.jobId }}) is running. Depending
+                                </div>
                             </div>
                         {% else %}
                             <div class="body-text--markdown">
