@@ -5,7 +5,7 @@
 require('../../../components/droppable/droppable.directive');
 
 var _ = require('lodash'),
-    devApiUrl = '//localhost:8080'; // //api.gbif-dev.org/v1/validator/
+    devApiUrl = '//localhost:8080'; // @todo //api.gbif-dev.org/v1/validator/
 
 angular
     .module('portal')
