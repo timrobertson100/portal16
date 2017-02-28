@@ -353,7 +353,7 @@ function getParticipantsContacts(contacts) {
             // Insert participant details
             let detailsTasks = [];
             data.results.forEach(function (p) {
-                detailsTasks.push(getParticipantDetails(p.id));
+                detailsTasks.push(Directory.getParticipantDetails(p.id));
             });
             return Q.all(detailsTasks);
         })
@@ -428,7 +428,7 @@ function getParticipantsContacts(contacts) {
     return deferred.promise;
 }
 
-function getParticipantDetails(participantId) {
+Directory.getParticipantDetails = participantId => {
     let deferred = Q.defer();
     let requestUrl = dataApi.directoryParticipant.url + '/' + participantId;
     let options = Directory.authorizeApiCall(requestUrl);
@@ -451,7 +451,7 @@ function getNodeDetails(nodeId) {
 
     helper.getApiDataPromise(requestUrl, options)
         .then(function (data) {
-            return getParticipantDetails(data.participantId)
+            return Directory.getParticipantDetails(data.participantId)
                 .then(function (result) {
                     data.participantName = result.name;
                     Directory.setMembership(result);
@@ -560,7 +560,7 @@ function getPersonContact(personId, contacts) {
             if (data.hasOwnProperty('participants') && data.participants.length > 0) {
                 data.participants.forEach(function (p) {
                     if (p.hasOwnProperty('participantId')) {
-                        participantTasks.push(getParticipantDetails(p.participantId));
+                        participantTasks.push(Directory.getParticipantDetails(p.participantId));
                     }
                 });
                 return Q.all(participantTasks).then(function (results) {
@@ -637,7 +637,7 @@ Directory.getParticipantHeads = pid => {
         heads = {},
         pDetail = {};
 
-    getParticipantDetails(pid)
+    Directory.getParticipantDetails(pid)
         .then(participant => {
             pDetail.id = participant.id;
             pDetail.name = participant.name;

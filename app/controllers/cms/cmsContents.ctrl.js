@@ -82,13 +82,42 @@ router.get([
                 // Render content if the result is not from URL Lookup.
                 if (typeof data.data[0] == 'object' && data.data[0].hasOwnProperty('created') && data.data[0].hasOwnProperty('title')) {
 
-                    // attach relatedDatasets via associated project_id.
-                    if (data.data[0].type == 'project' && data.data[0].projectId) {
-                        return cmsData.cmsEndpointAccess(dataApi.datasetSearch.url + '?project_id=' + data.data[0].projectId).then(function (datasets) {
-                            data.data[0].relatedDatasets = datasets.results;
-                            return cmsContent.renderPage(data, jsonOutput, res, req, next);
-                        });
+                    if (data.data[0].type == 'project') {
+
+                        let Q = require('q'),
+                            tasks = [];
+
+                        // attach relatedDatasets via associated project_id
+                        if (data.data[0].projectId) {
+                            tasks.push(cmsData.cmsEndpointAccess(dataApi.datasetSearch.url + '?project_id=' + data.data[0].projectId)
+                                .then(datasets => {
+                                    data.data[0].relatedDatasets = datasets.results;
+                                }));
+                        }
+
+                        // bring in participant information to build correct targetUrl
+                        if (data.data[0].gbifParticipants.length > 0) {
+                            let Directory = require('../../models/gbifdata/directory/directory');
+                            data.data[0].gbifParticipants.forEach(p => {
+                                tasks.push(Directory.getParticipantDetails(p.participantId)
+                                    .then(pInfo => {
+                                        p.participantInfo = pInfo;
+                                    })
+                                    .catch(err => {
+                                        next(err);
+                                    }));
+                            });
+                        }
+
+                        return Q.all(tasks)
+                            .then(data => {
+                                return cmsContent.renderPage(data, jsonOutput, res, req, next);
+                            })
+                            .catch(err => {
+                                next(err);
+                            });
                     }
+
                     return cmsContent.renderPage(data, jsonOutput, res, req, next);
                 }
                 // Redirect if the result is from URL Lookup.
